@@ -5,7 +5,7 @@
 ## Стек
 
 - **Unity 6000.4.0f1**
-- **VContainer** — DI
+- **VContainer**
 - **UniTask**
 
 ## Как запустить
