@@ -28,7 +28,7 @@ namespace Project.Code
             _secondsToNext = new ReactiveValue<float>();
         }
 
-        public override UniTask InitializeAsync(CancellationToken ct)
+        protected override UniTask OnInitializeAsync(CancellationToken ct)
         {
             _accumulatedStartTime = Now;
             UpdateProgress();
@@ -36,9 +36,9 @@ namespace Project.Code
             return UniTask.CompletedTask;
         }
 
-        public override async UniTask ReleaseAsync(CancellationToken ct)
+        protected override async UniTask OnReleaseAsync(CancellationToken ct)
         {
-            await _regenTask.SuppressCancellationThrow();
+            await _regenTask.AttachExternalCancellation(ct).SuppressCancellationThrow();
         }
 
         public bool TrySpend(int amount)
